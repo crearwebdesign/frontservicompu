@@ -1,0 +1,2 @@
+para mongoDB en windows 7 usar la version 3.2.22, se inicia en una ventana de comando llamar a mongod.exe
+             en windows 10 64 bits usar ---- se inicia automaticamente como un servicio de windows
