@@ -6,8 +6,10 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
 
+import { CargarUsuario } from '../interfaces/cargar-usuarios.interface';
 import { LoginForm } from '../interfaces/login-form.interface';
 import { RegisterForm } from '../interfaces/register-form.interface';
+
 import { Usuario } from '../models/usuario.model';
 
 
@@ -35,7 +37,15 @@ export class UsuarioService {
 
     get uid(): string{
       return this.usuario.uid || '';
-    }
+    };
+
+    get headers(){
+        return {
+          headers : {
+            'x-token': this.token
+          }
+        }
+    };
 
 
     googleInit(){
@@ -145,6 +155,12 @@ export class UsuarioService {
                         }
                       )
                     )
+  }
+
+  cargarUsuarios(desde : number = 5){
+    const url = `${base_url}/usuarios?desde=${desde}`; //la busquedad en el backend
+    return this.http.get<CargarUsuario>(url, this.headers)
+
   }
 
 
