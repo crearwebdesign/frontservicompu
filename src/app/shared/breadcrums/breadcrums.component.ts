@@ -26,7 +26,7 @@ export class BreadcrumsComponent implements OnDestroy {
         // este titulo viene de la variable data y cuando se pone entre llaves lo esta desaestructurando
         // lo esta sacando
         this.title = titulo;
-        document.title = `Soft Millenium Clinico Hospitalario - ${ titulo }`
+        document.title = `Soft Millenium Facturación e Inventarios - ${ titulo }`
         // este es el titulo que pone en la pestaña del navegador
         }
     )

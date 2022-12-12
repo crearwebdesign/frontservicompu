@@ -16,16 +16,17 @@ export class Usuario {
 
     get imagenUrl(){
 
-        //if (this.google){
-            if (this.img.includes('http')){
-                return this.img
-            }
-        //};
-        if (this.img){
-            return `${base_url}/upload/usuarios/${this.img}`;
-        }else{
+        if (!this.img){
             return `${base_url}/upload/usuarios/no-image`;
+        }else if (this.img.includes('http')){
+            return this.img
+        }else if (this.img){
+            return `${base_url}/upload/usuarios/${this.img}`;
         }
+        
+        // else{
+        //     return `${base_url}/upload/usuarios/no-image`;
+        // }
     };
 
     get elEmail(){

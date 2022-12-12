@@ -43,7 +43,11 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let usuario of usuarios" >
-                                <td>xxxx</td>
+                                <td class="text-center">
+                                    <img [src]="usuario.imagenUrl" 
+                                         alt="Avatar de Usuario"
+                                         class="avatar">
+                                </td>
                                 <td>{{usuario.email}}</td>
                                 <td>{{usuario.nombre}}</td>
                                 <td>{{usuario.role}}</td>
