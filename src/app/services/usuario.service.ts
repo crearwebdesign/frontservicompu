@@ -172,6 +172,11 @@ export class UsuarioService {
             })
            )
 
+  };
+
+  eliminarUsuario( usuario : Usuario){
+    const url = `${base_url}/usuarios/${usuario.uid}`; //la busquedad en el backend
+    return this.http.delete(url, this.headers)
   }
 
 

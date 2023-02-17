@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import Swal from 'sweetalert2';
+
 import { Usuario } from 'src/app/models/usuario.model';
 import { BusquedasService } from 'src/app/services/busquedas.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
@@ -59,6 +61,32 @@ export class UsuariosComponent implements OnInit {
           .subscribe( resultado => {
               this.usuarios = resultado
           })
+  };
+
+  eliminarUsuario( usuario : Usuario){
+    Swal.fire({
+      title: '¿ Borrar Uusario ?',
+      text: `Esta a punto de borrar a ${usuario.nombre}`,
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, borrarlo'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.usuarioService.eliminarUsuario(usuario)
+        .subscribe( resp => {
+                    this.cargarUsuarios();
+                    Swal.fire(
+                      'Usuario Borrado',
+                      `${usuario.nombre} fue eliminado correctamente`,
+                      'success'
+                    )
+                    }
+                  )
+      }
+    })
+
   }
 
 }
