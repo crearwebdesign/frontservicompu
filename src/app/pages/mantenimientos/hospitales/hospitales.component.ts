@@ -1,11 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { Subscription } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 import { Hospital } from 'src/app/models/hospital.models';
+
 import { HospitalService } from 'src/app/services/hospital.service';
 import { ModalImagenService } from 'src/app/services/modal-imagen.service';
-import { delay } from 'rxjs/operators';
+import { BusquedasService } from 'src/app/services/busquedas.service';
 
 @Component({
   selector: 'app-hospitales',
@@ -20,7 +22,8 @@ export class HospitalesComponent implements OnInit, OnDestroy {
   imgSubs : Subscription;
 
   constructor( private hospitalService : HospitalService,
-               private modalImagenService : ModalImagenService) { }
+               private modalImagenService : ModalImagenService,
+               private busquedasService : BusquedasService) { }
 
   ngOnInit(): void {
     this.cargarHospitales();
@@ -33,6 +36,17 @@ export class HospitalesComponent implements OnInit, OnDestroy {
     this.imgSubs.unsubscribe();
   };
   
+  buscar( termino : string){
+    if ( termino.length === 0 ){
+      return this.cargarHospitales();
+    };
+
+      this.busquedasService.buscar('hospitales',termino)
+          .subscribe( resultado => {
+              this.hospitales = resultado
+          })
+  };
+
   cargarHospitales(){
     this.cargando = true;
     this.hospitalService.cargarHospitales()
