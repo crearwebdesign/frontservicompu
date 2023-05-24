@@ -25,6 +25,7 @@ export class SidebarService {
         {titulo : 'Hospitales', url : 'hospitales'},
         {titulo : 'Médicos', url : 'medicos'}
         
+        
       ]
     }
   ];
