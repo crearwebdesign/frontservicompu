@@ -27,6 +27,8 @@ export class MedicoService {
       }
   };
 
+ 
+
   cargarMedicos(){
     const url = `${base_url}/medicos`; //la busquedad en el backend
     return this.http.get(url, this.headers).
@@ -35,6 +37,16 @@ export class MedicoService {
            )
 
   };
+
+  obtenerMedicoPorId ( id : string){
+    const url = `${base_url}/medicos/${id}`; //la busquedad en el backend
+    return this.http.get(url, this.headers).
+           pipe(
+            map( (resp : {ok : boolean, medico : Medico} ) =>  resp.medico)
+           )
+
+    };
+  
 
   crearMedico( medico : {nombre : string, hospital : string}){
     const url = `${base_url}/medicos`; //la busquedad en el backend

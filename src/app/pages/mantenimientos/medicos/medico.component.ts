@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 import { Hospital } from 'src/app/models/hospital.models';
 import { Medico } from 'src/app/models/medico.model';
 
 import { HospitalService } from 'src/app/services/hospital.service';
 import { MedicoService } from 'src/app/services/medico.service';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-medico',
@@ -25,9 +25,23 @@ export class MedicoComponent implements OnInit {
   constructor( private fb : FormBuilder,
                private hospitalService : HospitalService,
                private medicoService : MedicoService,
-               private router : Router) { }
+               private router : Router,
+               private activatedRoute : ActivatedRoute) { }
 
   ngOnInit(): void {
+
+    //this.activatedRoute.params.subscribe( params => {
+    this.activatedRoute.params.subscribe( ({id}) => {  
+      this.cargarMedico(id)
+      //console.log(id)
+      // { path : 'medico/:id', component : MedicoComponent ,data: { titulo : 'Mantenimiento de Medico'} }
+      // de aqui sale el id de pages.rounting.ts
+    } );
+
+
+    
+
+
     this.medicoForm = this.fb.group({
       nombre : ['',Validators.required],
       hospital : ['',Validators.required]
@@ -40,6 +54,14 @@ export class MedicoComponent implements OnInit {
           this.hospitalSeleccionado = this.hospitales.find( h => h._id === hospitalId);
         })
 
+  };
+
+  cargarMedico( id : string){
+     this.medicoService.obtenerMedicoPorId(id)
+         .subscribe( medico => {
+           console.log(medico);
+           this.medicoSeleccionado = medico
+         })
   };
 
   cargarHospitales(){
