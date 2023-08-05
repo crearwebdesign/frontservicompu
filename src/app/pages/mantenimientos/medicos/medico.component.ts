@@ -8,6 +8,7 @@ import { Medico } from 'src/app/models/medico.model';
 
 import { HospitalService } from 'src/app/services/hospital.service';
 import { MedicoService } from 'src/app/services/medico.service';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-medico',
@@ -64,6 +65,7 @@ export class MedicoComponent implements OnInit {
     };
 
     this.medicoService.obtenerMedicoPorId(id)
+         .pipe(delay(100))
          .subscribe( medico => {
            if (!medico){
                return this.router.navigateByUrl(`/dashboard/medicos`)
