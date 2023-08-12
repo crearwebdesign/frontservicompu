@@ -44,6 +44,11 @@ private transformarMedicos( resultados : any[]) : Medico[] {
   return resultados
 };
 
+busquedaGlobal(termino : string){
+  const url = `${base_url}/todo/${termino}`; //la busquedad en el backend
+        return this.http.get(url, this.headers)
+};
+
 buscar (
         tipo : 'usuarios' | 'medicos' | 'hospitales',
         termino : string
