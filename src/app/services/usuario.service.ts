@@ -72,10 +72,16 @@ export class UsuarioService {
             
                       })
           })
-      };            
+      };
+      
+  guardarLocalStorage( token : string, menu : string){
+    localStorage.setItem('token',token);
+    localStorage.setItem('menu',JSON.stringify(menu));
+  };
 
   logout(){
     localStorage.removeItem('token');
+    localStorage.removeItem('menu');
     //this.router.navigateByUrl('/login')
 
     if (this.usuario.google){
@@ -102,7 +108,7 @@ export class UsuarioService {
         (resp : any )=>{
           const { email, google, nombre, role, img = '', uid } = resp.usuario;
           this.usuario = new Usuario(nombre, email, '', img, google, role, uid);
-          localStorage.setItem('token',resp.token);
+          this.guardarLocalStorage(resp.token,resp.menu);
           return true
         }
       ),
@@ -116,7 +122,7 @@ export class UsuarioService {
                     .pipe(
                       tap(
                         (resp : any) => {
-                          localStorage.setItem('token',resp.token)
+                          this.guardarLocalStorage(resp.token,resp.menu);
                         }
                       )
                     )
@@ -135,7 +141,7 @@ export class UsuarioService {
                     .pipe(
                       tap(
                         (resp : any) => {
-                          localStorage.setItem('token',resp.token)
+                          this.guardarLocalStorage(resp.token,resp.menu);
                         }
                       )
                     )
@@ -147,7 +153,7 @@ export class UsuarioService {
                       tap(
                         (resp : any) => {
                           //console.log(resp);
-                          localStorage.setItem('token',resp.token)
+                          this.guardarLocalStorage(resp.token,resp.menu);
                         }
                       )
                     )
