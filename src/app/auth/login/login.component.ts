@@ -18,8 +18,8 @@ export class LoginComponent implements AfterViewInit {
 
   @ViewChild('googleBtn') googleBtn : ElementRef ;
 
-  private result : any;
-  public imgFondo : string;
+
+  public imgFondo : string = './assets/images/background/oficina.jpg';
 
   public loginForm = this.fb.group({
     email : [localStorage.getItem('email') || '',[ Validators.required, Validators.email]],
@@ -33,9 +33,11 @@ export class LoginComponent implements AfterViewInit {
                private ngZone : NgZone,
                private obtenerfondoService : ObtenerFondoService) {
 
-                this.result =  this.obtenerfondoService.resultado;
-                this.imgFondo = this.result.photos[0].src.large;
-                console.log(this.imgFondo)
+                this.obtenerfondoService.traerImgFondo()
+                    .subscribe( ( resp: any) => {
+                      this.imgFondo = resp.photos[0].src.portrait;
+                      // console.log(this.imgFondo)
+                    });
                 }
 
   ngAfterViewInit(): void {
