@@ -46,3 +46,47 @@
     z-index: 9999;
 }
 
+
+#apartado1{
+    width:100px;
+    height:100px;
+    border:3px solid brown;
+    border-radius:22px;
+ }
+
+ .intro-content {
+    --margin-left: 0;
+    --margin-right: 0;
+    --max-width: 25rem;
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 var(--margin-right) 0 var(--margin-left);
+    padding: 0 0 3.75rem 0;
+}
+
+.section-heading {
+    margin-bottom: 3.25rem;
+    max-width: 850px;
+}
+
+.section-subheading {
+    margin-bottom: 0.3125rem;
+    text-transform: uppercase;
+    color: var(--accent-color);
+}
+
+.section-desc {
+    margin: 1.25rem 0;
+    max-width: 30rem;
+    color: var(--text-secondary);
+}
+
+.intro-item {
+    display: block;
+    min-height: 40rem;
+    overflow: hidden;
+}
+
+.intro-item-type-1 {
+    color: rgba(255, 255, 255, 0.9);
+}

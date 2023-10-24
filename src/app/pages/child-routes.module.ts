@@ -20,7 +20,7 @@ import { AdminGuard } from '../guards/admin.guard';
 
 
 const childRoutes : Routes = [
-  { path : '', component : DashboardComponent,data: { titulo : 'DashBoard'} },
+  { path : '', component : DashboardComponent,data: { titulo : 'Empresa'} },
       { path : 'progress', component : ProgressComponent,data: { titulo : 'Progress'} },
       { path : 'grafica1', component : Grafica1Component,data: { titulo : 'Grafica#1'} },
       { path : 'account-settings', component : AccountSettingsComponent,data: { titulo : 'Configuración'} },
